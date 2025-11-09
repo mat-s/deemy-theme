@@ -1,0 +1,8 @@
+@use "../variables" as v;
+@use "../mixins" as m;
+
+.deemy-list ul {
+  list-style-position: inside;
+  display: inline-block;
+  padding-left: 0;
+}

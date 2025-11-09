@@ -1,16 +1,70 @@
 @use '../variables' as v;
 @use '../mixins' as m;
 
-.container {
-  width: 100%;
-  max-width: v.$container-max;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: v.$gutter;
-  padding-right: v.$gutter;
+.e-con.e-con > .e-con-inner > .elementor-widget.deemy-max-width, 
+.elementor.elementor .e-con > .elementor-widget.deemy-max-width {
+  max-width: 550px;
 }
 
-.section {
-  padding: 2rem 0;
-  @include m.up(m.$bp-md) { padding: 3rem 0; }
+.deemy-bg {
+  /* specify list of colours we'd like to use, here: */
+  --clrs: #D794A4, #6F00FF, #913CFE, #6F00FF, #9151FF, #6F00FF;
+  /* specify what blend modes we want to use - experiment for some crazy, artistic effects */
+  --blendMode1: lighten;
+  --blendMode2: lighten;
+  /*specify durations of animations */
+  --linearTime: 30s;
+  --cwTime: 77s;
+  --ccwTime: 111s;
+  /* set width/height as needed */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(to right, var(--clrs));
+  // background: linear-gradient(to right, #E9AA76, #FFE2BC);;
+  background-size: 300%;
+  animation: var(--linearTime) ease-in-out 0s infinite alternate linearBgAnim;
+
+  &__gradient1,
+  &__gradient2 {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+  } 
+
+  &__gradient1 {
+    background: radial-gradient(var(--clrs));
+    // background: radial-gradient(to right, #FFCC80, #6F00FF);
+    mix-blend-mode: var(--blendMode1);
+    animation: var(--cwTime) ease-in-out 2s infinite gradient1Anim;
+  }
+
+  &__gradient2 {
+    background: radial-gradient(var(--clrs));
+    // background: radial-gradient(to right, #FFFFFF, #6F00FF);
+    mix-blend-mode: var(--blendMode2);
+    animation: var(--ccwTime) ease-in-out 1s infinite gradient2Anim;
+  }
+}
+
+@keyframes linearBgAnim {
+  from { background-position: left;}
+  to { background-position: right;}
+}
+
+@keyframes gradient1Anim {
+  0% { top:0; left:0;}
+  25% { top:0; left: -100%;}
+  50% { top: -100%; left: -100%;}
+  75% { top: -100%; left:0;}
+  100% { top:0; left:0;}
+}
+
+@keyframes gradient2Anim {
+  0% { bottom:0; right:0;}
+  25% { bottom: -100%; right:0;}
+  50% { bottom: -100%; right: -100%;}
+  75% { bottom:0; right: -100%;}
+  100% { bottom:0; right:0;}
 }

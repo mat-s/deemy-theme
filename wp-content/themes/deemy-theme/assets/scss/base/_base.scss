@@ -1,4 +1,4 @@
-@use '../variables' as v;
+@use "../variables" as v;
 
 body {
   font-family: v.$font-base;
@@ -7,7 +7,15 @@ body {
   color: v.$color-text;
 }
 
-a { color: v.$color-primary; text-decoration: none; }
-a:hover { text-decoration: underline; }
+a {
+  color: v.$color-primary;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+a:hover {
+  text-decoration: underline;
+}
 
-::selection { background: rgba(v.$color-primary, 0.2); }
+::selection {
+  background: rgba(v.$color-primary, 0.2);
+}

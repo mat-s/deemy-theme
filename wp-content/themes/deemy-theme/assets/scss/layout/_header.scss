@@ -1,9 +1,14 @@
 @use '../variables' as v;
 @use '../mixins' as m;
 
-.gc-header {
-  &__icons {
-    width: auto;
+.deemy-header {
+  &__logo {
+    width: 60px;
+    .site-logo {
+      color: var(--e-global-color-d438129);
+      &:hover {
+        color: var(--e-global-color-primary);
+      }
+    }
   }
 }
-

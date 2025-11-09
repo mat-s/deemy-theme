@@ -1,0 +1,9 @@
+@use "../variables" as v;
+@use "../mixins" as m;
+
+.deemy-carousel {
+  display: flex;
+  .swiper-slide {
+    display: flex;
+  }
+}
