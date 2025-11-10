@@ -26,6 +26,36 @@ add_action('wp_enqueue_scripts', function () {
     $deps,
     wp_get_theme()->get('Version')
   );
+  
+  // GSAP (via CDN), dann Theme-JS
+  wp_register_script(
+    'gsap',
+    'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
+    [],
+    '3.12.5',
+    true
+  );
+
+  // Optional: ScrollTrigger aktivieren – bei Bedarf einkommentieren
+  // wp_register_script(
+  //   'gsap-scrolltrigger',
+  //   'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
+  //   ['gsap'],
+  //   '3.12.5',
+  //   true
+  // );
+
+  $theme_js = get_stylesheet_directory() . '/assets/js/gsap-init.js';
+  $theme_js_uri = get_stylesheet_directory_uri() . '/assets/js/gsap-init.js';
+  $theme_js_ver = file_exists($theme_js) ? filemtime($theme_js) : wp_get_theme()->get('Version');
+
+  wp_enqueue_script(
+    'deemy-theme-js',
+    $theme_js_uri,
+    ['gsap'],
+    $theme_js_ver,
+    true
+  );
 }, 100);
 
 
