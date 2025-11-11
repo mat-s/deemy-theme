@@ -36,14 +36,32 @@ add_action('wp_enqueue_scripts', function () {
     true
   );
 
-  // Optional: ScrollTrigger aktivieren – bei Bedarf einkommentieren
-  // wp_register_script(
-  //   'gsap-scrolltrigger',
-  //   'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
-  //   ['gsap'],
-  //   '3.12.5',
-  //   true
-  // );
+  // ScrollTrigger-Plugin
+  wp_register_script(
+    'gsap-scrolltrigger',
+    'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
+    ['gsap'],
+    '3.12.5',
+    true
+  );
+
+  // ScrollToPlugin für weiches, programmatisches Scrollen
+  wp_register_script(
+    'gsap-scrollto',
+    'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js',
+    ['gsap'],
+    '3.12.5',
+    true
+  );
+
+  // Observer Plugin für Wheel/Touch Erkennung und preventDefault
+  wp_register_script(
+    'gsap-observer',
+    'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Observer.min.js',
+    ['gsap'],
+    '3.12.5',
+    true
+  );
 
   $theme_js = get_stylesheet_directory() . '/assets/js/gsap-init.js';
   $theme_js_uri = get_stylesheet_directory_uri() . '/assets/js/gsap-init.js';
@@ -52,7 +70,7 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_script(
     'deemy-theme-js',
     $theme_js_uri,
-    ['gsap'],
+    ['gsap', 'gsap-scrolltrigger', 'gsap-scrollto', 'gsap-observer'],
     $theme_js_ver,
     true
   );
