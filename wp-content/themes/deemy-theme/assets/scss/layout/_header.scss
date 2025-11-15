@@ -6,9 +6,27 @@
     width: 60px;
     .site-logo {
       color: var(--e-global-color-d438129);
+      transition: color 0.3s ease;
       &:hover {
         color: var(--e-global-color-primary);
       }
+    }
+  }
+  &__menu {
+    .elementor-icon svg {
+      transition: fill 0.3s ease;
+    }
+  }
+}
+
+body.section-05-active,
+body.section-06-active,
+body.section-07-active {
+  .deemy-header {
+    .site-logo,
+    .deemy-header__menu .elementor-icon svg {
+      color: var(--e-global-color-accent) !important;
+      fill: var(--e-global-color-accent) !important;
     }
   }
 }

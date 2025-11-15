@@ -148,9 +148,45 @@ a:hover {
 }
 .deemy-header__logo .site-logo {
   color: var(--e-global-color-d438129);
+  transition: color 0.3s ease;
 }
 .deemy-header__logo .site-logo:hover {
   color: var(--e-global-color-primary);
+}
+.deemy-header__menu .elementor-icon svg {
+  transition: fill 0.3s ease;
+}
+
+body.section-05-active .deemy-header .site-logo,
+body.section-05-active .deemy-header .deemy-header__menu .elementor-icon svg,
+body.section-06-active .deemy-header .site-logo,
+body.section-06-active .deemy-header .deemy-header__menu .elementor-icon svg,
+body.section-07-active .deemy-header .site-logo,
+body.section-07-active .deemy-header .deemy-header__menu .elementor-icon svg {
+  color: var(--e-global-color-accent) !important;
+  fill: var(--e-global-color-accent) !important;
+}
+
+.elementor-element.deemy-sticky-button {
+  position: fixed;
+  bottom: 5rem;
+  transition: all 0.5s ease-in-out;
+  z-index: 1000;
+  opacity: 1;
+}
+
+body.section-07-active .deemy-sticky-button {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  margin-top: 2rem;
+  justify-content: flex-start;
+}
+
+body.section-08-active .deemy-sticky-button {
+  position: absolute;
+  top: -60px;
+  opacity: 0;
 }
 
 .deemy-list ul {

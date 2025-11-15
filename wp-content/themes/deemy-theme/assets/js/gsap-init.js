@@ -31,6 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
       let animating = false;
 
       // Hilfsfunktionen
+      const setBodySectionClass = (i) => {
+        const body = document.body;
+        // Alte section-XX-active Klassen entfernen
+        body.classList.forEach((cls) => {
+          if (/^section-\d{2}-active$/.test(cls)) body.classList.remove(cls);
+        });
+        const label = String(i + 1).padStart(2, '0');
+        body.classList.add(`section-${label}-active`);
+      };
+
       const getIndexByScroll = () => {
         const y = window.scrollY;
         let nearestIdx = 0;
@@ -54,12 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
           duration: 0.6,
           ease: 'power2.out',
           scrollTo: { y: sections[index], autoKill: false },
-          onComplete: () => { animating = false; }
+          onComplete: () => { animating = false; setBodySectionClass(index); }
         });
       };
 
       // Initial auf den nächsten/naheliegenden Abschnitt ausrichten
       index = getIndexByScroll();
+      setBodySectionClass(index);
 
       // Input über Observer abfangen und Standard-Scrollen unterbinden
       Observer.create({
@@ -84,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { passive: false });
 
       // Bei Größenänderung neu berechnen
-      const recalc = () => { index = getIndexByScroll(); ScrollTrigger.refresh(); };
+      const recalc = () => { index = getIndexByScroll(); setBodySectionClass(index); ScrollTrigger.refresh(); };
       window.addEventListener('resize', recalc);
       window.addEventListener('load', recalc);
 
@@ -92,4 +103,30 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.overscrollBehaviorY = 'none';
     }
   }
+
+  // Sticky-Button: erst ab zweiter Section einblenden und von unten hochfahren
+  // if (window.ScrollTrigger) {
+  //   const sections = gsap.utils.toArray('.snap-section');
+  //   const btn = document.querySelector('.deemy-sticky-button');
+    
+  //   if (btn && sections.length > 1) {
+  //     // Initial off-screen unten und nicht klickbar
+  //     gsap.set(btn, { y: '-4rem', autoAlpha: 0 });
+  //     btn.style.pointerEvents = 'none';
+
+  //     gsap.to(btn, {
+  //       y: '5rem',
+  //       autoAlpha: 1,
+  //       duration: 0.35,
+  //       ease: 'power2.out',
+  //       scrollTrigger: {
+  //         trigger: sections[1],
+  //         start: 'top top',
+  //         toggleActions: 'play reverse play reverse'
+  //       },
+  //       onStart: () => { btn.style.pointerEvents = 'auto'; },
+  //       onReverseComplete: () => { btn.style.pointerEvents = 'none'; }
+  //     });
+  //   }
+  // }
 });
